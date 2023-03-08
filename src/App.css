@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Labrada', serif;    
+    line-height: 1.4;
+    color: #ffffff;
+    background: #353535;
+    height: 100vh;
+    font-size: 1.2em;
+}
+
+.fullpage {
+    position: relative;
+    min-height: 100vh;
+}
+
+.main-title {
+    font-family: 'Rampart One', cursive;
+    color: rgb(255, 255, 255);
+    text-shadow: 7px 7px 10px rgb(188, 58, 58);
+    font-size: 6vw; 
+}
+
+h1 {
+    font-family: 'Rampart One', cursive;
+}
+
+nav {
+    background-color: rgb(188, 58, 58);
+    text-decoration: none !important;
+}
+
+.footer {
+    background-color: rgb(188, 58, 58);
+    color: rgb(238, 217, 56);
+    font-size: medium;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-family: 'Rampart One', cursive;
+    font-size: 1.3em;
+    margin-right: 4%;
+    margin-left: 2%;
+}
+
+.navbar-brand, .nav-link, .dropdown-item {
+    color: rgb(238, 217, 56);
+    background: rgb(188, 58, 58);
+}
+
+.navbar-brand:hover, .nav-link:hover, .dropdown-item:hover {
+    color: white;
+    background: rgb(188, 58, 58);
+}
+
+.MuiAutocomplete-root {
+    background-color: white;
+}
+
+.btn-yellow, .addfavorite {
+    background: rgb(238, 217, 56);
+    color: #353535;
+    border: none;
+}
+
+.btn-yellow:hover, .addfavorite:hover {
+    background: rgb(211, 190, 25);
+    color: #242323
+}
+
+.btn-red {
+    color: white;
+    background: rgb(188, 58, 58);
+}
+
+.btn-red:hover {
+    color: white;
+    background: rgb(163, 50, 50);
+}
+
+.comment {
+    font-size:medium
+}
+
+
+.comic-img {
+    box-shadow: 0 4px 8px 0 rgba(109, 109, 109, 0.779), 0 6px 20px 0 rgba(109, 109, 109, 0.779);
+}
+

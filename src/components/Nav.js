@@ -1,44 +1,57 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
+import Paper from '@mui/material/Paper';
 
 
-export default function Nav() {
+
+export default function Nav({handleClick, getFirstName, message, getProfileInfo, createPopUp, logMeOut, user }) {
+
     return (
-        <div>
-            <nav class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Marvelous</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+        <Paper elevation={10}>
+            <nav className="navbar navbar-expand-lg">
+                <div className="container-fluid">
+                    <Link className="navbar-brand" to={'/'}>Marvelous</Link>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Reading List</a>
+                    <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link className="nav-link" to={'/thisweek'}>New Comics</Link>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">New Comics</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">My Profile</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Search
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><Link class="dropdown-item" to={'/character'} >Characters</Link></li>
-                                    <li><Link class="dropdown-item" to={'/comics'}>Comics</Link></li>
-                                    <li><Link class="dropdown-item" to={'/events'}>Events</Link></li>
-                                    <li><a class="dropdown-item" href="#">Creators</a></li>
+                                <ul className="dropdown-menu py-0">
+                                    <li><Link className="dropdown-item" to={'/character'} >Characters</Link></li>
+                                    <li><Link className="dropdown-item" to={'/comics'}>Comics</Link></li>
+                                    <li><Link className="dropdown-item" to={'/events'}>Events</Link></li>
+                                    <li><Link className="dropdown-item" to={'/creators'}>Creators</Link></li>
                                 </ul>
                             </li>
+                            {user.uid ? <>
+                                <li className="nav-item">
+                                    <Link className="nav-link active" aria-current="page" to={'/readinglist'}>Reading List</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to={'/profile'}>{(getFirstName(user))}'s Profile</Link>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link className='nav-link' to={'/'} onClick={() => {logMeOut()}}>Logout</Link>
+                                </li>
+                            </> :
+                                <li className="nav-item">
+                                    <Link className="nav-link" onClick={() => {createPopUp()}}>Login</Link>
+                                </li>}
                         </ul>
                     </div>
-                    <Avatar alt="Remy Sharp" src="..." />
+                    {user.uid ?
+                        <Avatar alt={user.displayName} src={user.photoURL} /> : <></>
+                    }
                 </div>
             </nav>
-        </div>
+        </Paper>
     )
 }
