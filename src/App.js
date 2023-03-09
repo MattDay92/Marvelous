@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Nav from './components/Nav'
 import Character from './view/Character'
 import Search_Comics from './view/Search_Comics'
@@ -401,8 +401,7 @@ export default function () {
     console.log(data)
 
     setProfile(data.user)
-    localStorage.setItem('profile_marvelous', JSON.stringify(data.user))
-
+    localStorage.setItem('profile_marvelous', JSON.stringify(data.user)) 
   };
 
   const getProfileInfo = async (user) => {

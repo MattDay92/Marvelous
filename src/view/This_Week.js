@@ -45,6 +45,7 @@ export default function This_Week() {
                             <p>{i.title}</p>
                         </div>)}
                     </div>}</div> */}
+            
             <div className='col d-flex justify-content-center'>
                 <ImageList sx={{ width: 1200 }} cols={5} gap={10}>
                     {new_comics.map((item) => (

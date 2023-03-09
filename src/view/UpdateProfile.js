@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 export default function UpdateProfile({ updateUser, profile, user, getFirstName }) {
     
+    const navigate = useNavigate()
+
 
     return (
         <>
@@ -23,7 +25,7 @@ export default function UpdateProfile({ updateUser, profile, user, getFirstName 
                         </div>
                     </div>
                     <div className='d-flex justify-content-center my-3'>
-                        <button className='btn btn-yellow' type='submit'>Update {(getFirstName(user))}'s Profile</button>
+                        <button onClick={navigate('/profile')} className='btn btn-yellow' type='submit'>Update {(getFirstName(user))}'s Profile</button>
                     </div>
                 </div>
             </form>
