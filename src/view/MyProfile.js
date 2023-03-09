@@ -71,7 +71,7 @@ export default function MyProfile({ user, profile, getFirstName, getFavorites, f
                         {/* <h4 className='my-3'>Comics Read: </h4> */}
                     </div>
                     <div className='col-6 d-flex justify-content-center align-items-center'>
-                        <img className='rounded-circle' src={profile.photoURL} alt={profile.displayName} style={{ height: '50%'}} />
+                        <img className='rounded-circle' src={profile.photoURL} style={{ height: '50%'}} />
                     </div>
                 </div>
                 <div className='d-flex justify-content-around my-3'>
