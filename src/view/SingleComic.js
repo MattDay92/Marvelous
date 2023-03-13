@@ -6,7 +6,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 
 
-export default function SingleComic({ user, handleClick, handleClose, action, open , message, favorites, list, getReadingList, addToReadingList, addToFavorites, deleteFromFavorites, deleteFromReadingList, listids, ids }) {
+export default function SingleComic({ user, handleClick, handleClose, action, open, message, favorites, list, getReadingList, addToReadingList, addToFavorites, deleteFromFavorites, deleteFromReadingList, listids, ids }) {
   const { comicid } = useParams()
   const [comic, setComic] = useState([])
   const [rating, setRating] = useState()
@@ -14,6 +14,7 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
 
   const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
   const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
   const getComic = async () => {
 
@@ -35,7 +36,7 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
       comic_id: comicid
     }
 
-    const url = `http://127.0.0.1:5000/api/getcomments`
+    const url = `${BACKEND_URL}/api/getcomments`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -63,7 +64,7 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
       name: user.displayName
     }
 
-    const url = `http://127.0.0.1:5000/api/addcomment`
+    const url = `${BACKEND_URL}/api/addcomment`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -88,7 +89,7 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
       comment_id: c.id
     }
 
-    const url = `http://127.0.0.1:5000/api/deletecomment`
+    const url = `${BACKEND_URL}/api/deletecomment`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -120,8 +121,9 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
   }, [list])
 
   const img_url = (i) => {
-    let x = i.thumbnail.path
-    return x + '.jpg'
+    const url = i.thumbnail.path
+    const x = url.split(':')
+    return x[0] + 's:' + x[1] + '.jpg'
   }
 
   // const extra_img_url = (i) => {
@@ -188,9 +190,9 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
       <div className='row d-flex justify-content-around my-5'>
         <div className='col-5 text-center'>
           <a className='btn btn-yellow btn-sm col-4 mx-3 text-center' href={comic.urls[0].url} target="_blank">Read on Marvel.com</a>
-          {listids.includes(parseInt(comicid))? <button className='btn btn-red btn-sm col-2 mx-3 text-center' onClick={() => {deleteFromReadingList(comic); handleClick()}}>Delete <AutoStoriesIcon /></button> :
+          {listids.includes(parseInt(comicid)) ? <button className='btn btn-red btn-sm col-2 mx-3 text-center' onClick={() => { deleteFromReadingList(comic); handleClick() }}>Delete <AutoStoriesIcon /></button> :
             <button className='btn addfavorite btn-sm col-2 mx-3 text-center' onClick={() => { addToReadingList(comic); handleClick() }}><AutoStoriesIcon /></button>}
-          {ids.includes(parseInt(comicid))? <button className='btn btn-red btn-sm col-2 mx-3 text-center' onClick={() => {deleteFromFavorites(comic); handleClick() }}>Delete <FavoriteIcon /></button> :
+          {ids.includes(parseInt(comicid)) ? <button className='btn btn-red btn-sm col-2 mx-3 text-center' onClick={() => { deleteFromFavorites(comic); handleClick() }}>Delete <FavoriteIcon /></button> :
             <button className='btn addfavorite btn-sm col-2 mx-3 text-center' onClick={() => { addToFavorites(comic); handleClick() }}><FavoriteIcon /></button>}
         </div>
         <div className='col-5'>
@@ -204,8 +206,8 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
             </div>
               <div className='d-flex justify-content-around'>
                 <span className='comment'>{c.name}</span>
-                {c.uid != user.uid? <></>:
-                <button className='btn delete-comment btn-red btn-sm' onClick={() => { deleteComment(c) }}>Delete</button>}
+                {c.uid != user.uid ? <></> :
+                  <button className='btn delete-comment btn-red btn-sm' onClick={() => { deleteComment(c) }}>Delete</button>}
               </div>
             </div>
             )}

@@ -5,10 +5,12 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 export default function ReadingList({handleClick, setMessage, user, getReadingList, getFirstName, list, setList }) {
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     const img_url = (i) => {
-        let x = i.image
-        return x + '.jpg'
+        const url = i.image
+        const x = url.split(':')
+        return x[0] + 's:' + x[1] + '.jpg'
     }
 
     useEffect(() => {
@@ -21,7 +23,7 @@ export default function ReadingList({handleClick, setMessage, user, getReadingLi
           comic_id: c.comicId,
         }
     
-        const url = `http://127.0.0.1:5000/api/deletefromreadinglist`
+        const url = `${BACKEND_URL}/api/deletefromreadinglist`
         const options = {
           method: "POST",
           body: JSON.stringify(reqBody),
@@ -41,9 +43,6 @@ export default function ReadingList({handleClick, setMessage, user, getReadingLi
 
         setMessage(data.message)
       }
-    
-
-
 
     return (
         <>

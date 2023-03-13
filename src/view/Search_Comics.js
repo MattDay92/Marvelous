@@ -15,7 +15,7 @@ export default function Comics() {
 
         const hash = MARVEL_HASH
         const PublicKey = MARVEL_API_KEY
-        const url = `http://gateway.marvel.com/v1/public/comics?title=${search}&noVariants=true&limit=100&ts=1&apikey=${PublicKey}&hash=${hash}`
+        const url = `https://gateway.marvel.com/v1/public/comics?title=${search}&noVariants=true&limit=100&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
         const res = await fetch(url)
@@ -27,8 +27,9 @@ export default function Comics() {
 
 
     const img_url = (i) => {
-        let x = i.thumbnail.path
-        return x + '.jpg'
+        const url = i.thumbnail.path
+        const x = url.split(':')
+        return x[0] + 's:' + x[1] + '.jpg'
     }
 
     

@@ -13,7 +13,7 @@ export default function Events() {
 
         const hash = MARVEL_HASH
         const PublicKey = MARVEL_API_KEY
-        const url = `http://gateway.marvel.com/v1/public/events?name=${search}&ts=1&apikey=${PublicKey}&hash=${hash}`
+        const url = `https://gateway.marvel.com/v1/public/events?name=${search}&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
         const res = await fetch(url)
@@ -24,8 +24,9 @@ export default function Events() {
     }
 
     const img_url = (e) => {
-        let x = e.thumbnail.path
-        return x + '.jpg'
+        const url = e.thumbnail.path
+        const x = url.split(':')
+        return x[0] + 's:' + x[1] + '.jpg'
     }
 
     return (

@@ -17,7 +17,7 @@ export default function Creators() {
 
         const hash = MARVEL_HASH
         const PublicKey = MARVEL_API_KEY
-        const url = `http://gateway.marvel.com/v1/public/creators?firstName=${name[0]}&lastName=${name[-1]}&ts=1&apikey=${PublicKey}&hash=${hash}`
+        const url = `https://gateway.marvel.com/v1/public/creators?firstName=${name[0]}&lastName=${name[-1]}&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
         const res = await fetch(url)
@@ -28,7 +28,7 @@ export default function Creators() {
         const creator_id = data.data.results[0].id
         console.log(creator_id)
 
-        const url2 = `http://gateway.marvel.com/v1/public/creators/${creator_id}/comics?format=comic&noVariants=true&orderBy=-onsaleDate&ts=1&apikey=${PublicKey}&hash=${hash}`
+        const url2 = `https://gateway.marvel.com/v1/public/creators/${creator_id}/comics?format=comic&noVariants=true&orderBy=-onsaleDate&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
         const res2 = await fetch(url2)
@@ -36,7 +36,7 @@ export default function Creators() {
         setComics(data2.data.results)
         console.log(data2.data.results)
 
-        const url3 = `http://gateway.marvel.com/v1/public/creators/${creator_id}/events?&ts=1&apikey=${PublicKey}&hash=${hash}`
+        const url3 = `https://gateway.marvel.com/v1/public/creators/${creator_id}/events?&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
         const res3 = await fetch(url3)
@@ -47,17 +47,20 @@ export default function Creators() {
 
 
     const img_url = (i) => {
-        let x = i.thumbnail.path
-        return x + '.jpg'
+        const url = i.thumbnail.path
+        const x = url.split(':')
+        return x[0] + 's:' + x[1] + '.jpg'
     }
 
     const img_url_comics = (comic) => {
-        let x = comic.thumbnail.path
-        return x + '.jpg'
+        const url = comic.thumbnail.path
+        const x = url.split(':')
+        return x[0] + 's:' + x[1] + '.jpg'
     }
     const img_url_events = (event) => {
-        let x = event.thumbnail.path
-        return x + '.jpg'
+        const url = event.thumbnail.path
+        const x = url.split(':')
+        return x[0] + 's:' + x[1] + '.jpg'
     }
 
     return creator.length === 0 ? <><div className='fullpage'>

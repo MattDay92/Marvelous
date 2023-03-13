@@ -24,32 +24,11 @@ export default function MyProfile({ user, profile, getFirstName, getFavorites, f
     }, [])
 
     const img_url = (i) => {
-        let x = i.image
-        return x + '.jpg'
+        const url = i.image
+        const x = url.split(':')
+        return x[0] + 's:' + x[1] + '.jpg'
     }
 
-    const deleteFromFavorites = async (c) => {
-        const reqBody = {
-            uid: user.uid,
-            comic_id: c.comicId
-        }
-
-        const url = `http://127.0.0.1:5000/api/deletefromfavorites`
-        const options = {
-            method: "POST",
-            body: JSON.stringify(reqBody),
-            headers: {
-                "Content-Type": 'application/json'
-            }
-        }
-
-        console.log(url, options)
-
-        const res = await fetch(url, options);
-        const data = await res.json();
-        console.log(data)
-        setFavorites(data.favorites)
-    }
 
     const favoriteIds = () => {
         let i

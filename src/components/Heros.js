@@ -19,7 +19,7 @@ export default function Heros({favorite_char}) {
         const hash = '93ff149b2c28d22cb9adf5cdafa2a845'
         const PublicKey = 'efad1a5f2b651e2a8b909ed94669c244'
         const PrivateKey = 'a2038ae9e1466f847958a24ceb1891ed3a266be6'
-        const url = `http://gateway.marvel.com/v1/public/characters?name=${name}&ts=1&apikey=${PublicKey}&hash=${hash}`
+        const url = `https://gateway.marvel.com/v1/public/characters?name=${name}&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
         const res = await fetch(url)

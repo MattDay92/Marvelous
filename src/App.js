@@ -56,6 +56,7 @@ export default function () {
 
   const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
   const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
   const handleClick = () => {
     setOpen(true);
@@ -85,99 +86,99 @@ export default function () {
   const getAllCharacters = async () => {
     const hash = MARVEL_HASH
     const PublicKey = MARVEL_API_KEY
-    const url = `http://gateway.marvel.com/v1/public/characters?limit=100&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url = `https://gateway.marvel.com/v1/public/characters?limit=100&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
     const res = await fetch(url)
     const data = await res.json()
     const chars1 = data.data.results
 
-    const url2 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=100&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url2 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=100&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res2 = await fetch(url2)
     const data2 = await res2.json()
     const chars2 = data2.data.results
 
 
-    const url3 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=200&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url3 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=200&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res3 = await fetch(url3)
     const data3 = await res3.json()
     const chars3 = data3.data.results
 
-    const url4 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=300&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url4 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=300&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res4 = await fetch(url4)
     const data4 = await res4.json()
     const chars4 = data4.data.results
 
-    const url5 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=400&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url5 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=400&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res5 = await fetch(url5)
     const data5 = await res5.json()
     const chars5 = data5.data.results
 
-    const url6 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=500&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url6 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=500&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res6 = await fetch(url6)
     const data6 = await res6.json()
     const chars6 = data6.data.results
 
-    const url7 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=600&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url7 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=600&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res7 = await fetch(url7)
     const data7 = await res7.json()
     const chars7 = data7.data.results
 
-    const url8 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=700&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url8 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=700&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res8 = await fetch(url8)
     const data8 = await res8.json()
     const chars8 = data8.data.results
 
-    const url9 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=800&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url9 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=800&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res9 = await fetch(url9)
     const data9 = await res9.json()
     const chars9 = data9.data.results
 
-    const url10 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=900&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url10 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=900&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res10 = await fetch(url10)
     const data10 = await res10.json()
     const chars10 = data10.data.results
 
-    const url11 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=1000&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url11 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=1000&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res11 = await fetch(url11)
     const data11 = await res11.json()
     const chars11 = data11.data.results
 
-    const url12 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=1100&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url12 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=1100&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res12 = await fetch(url12)
     const data12 = await res12.json()
     const chars12 = data12.data.results
 
-    const url13 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=1200&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url13 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=1200&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res13 = await fetch(url13)
     const data13 = await res13.json()
     const chars13 = data13.data.results
 
-    const url14 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=1300&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url14 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=1300&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res14 = await fetch(url14)
     const data14 = await res14.json()
     const chars14 = data14.data.results
 
-    const url15 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=1400&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url15 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=1400&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res15 = await fetch(url15)
     const data15 = await res15.json()
     const chars15 = data15.data.results
 
-    const url16 = `http://gateway.marvel.com/v1/public/characters?limit=100&offset=1500&ts=1&apikey=${PublicKey}&hash=${hash}`
+    const url16 = `https://gateway.marvel.com/v1/public/characters?limit=100&offset=1500&ts=1&apikey=${PublicKey}&hash=${hash}`
 
     const res16 = await fetch(url16)
     const data16 = await res16.json()
@@ -356,7 +357,7 @@ export default function () {
       favorite_char: 'None'
     }
 
-    const url = `http://127.0.0.1:5000/api/createuser`
+    const url = `${BACKEND_URL}/api/createuser`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -393,7 +394,7 @@ export default function () {
       favorite_char: favorite_char
     }
 
-    const url = `http://127.0.0.1:5000/api/createuser`
+    const url = `${BACKEND_URL}/api/createuser`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -414,7 +415,7 @@ export default function () {
   };
 
   const getProfileInfo = async (user) => {
-    const url = `http://127.0.0.1:5000/api/senduser`
+    const url = `${BACKEND_URL}/api/senduser`
     const options = {
       method: "POST",
       body: JSON.stringify(user),
@@ -468,7 +469,7 @@ export default function () {
       comic_title: c.title
     }
 
-    const url = `http://127.0.0.1:5000/api/addtofavorites`
+    const url = `${BACKEND_URL}/api/addtofavorites`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -493,7 +494,7 @@ export default function () {
       uid: user.uid
     }
 
-    const url = `http://127.0.0.1:5000/api/getfavorites`
+    const url = `${BACKEND_URL}/api/getfavorites`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -515,7 +516,7 @@ export default function () {
       uid: user.uid
     }
 
-    const url = `http://127.0.0.1:5000/api/getreadinglist`
+    const url = `${BACKEND_URL}/api/getreadinglist`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -541,7 +542,7 @@ export default function () {
       comic_title: c.title
     }
 
-    const url = `http://127.0.0.1:5000/api/addtoreadinglist`
+    const url = `${BACKEND_URL}/api/addtoreadinglist`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -568,7 +569,7 @@ export default function () {
       comic_id: c.id
     }
 
-    const url = `http://127.0.0.1:5000/api/deletefromreadinglist`
+    const url = `${BACKEND_URL}/api/deletefromreadinglist`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -600,7 +601,7 @@ export default function () {
       comic_id: c.id
     }
 
-    const url = `http://127.0.0.1:5000/api/deletefromfavorites`
+    const url = `${BACKEND_URL}/api/deletefromfavorites`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),

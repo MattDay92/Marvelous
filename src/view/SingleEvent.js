@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-export default function SingleEvent({addToFavorites}) {
+export default function SingleEvent({ addToFavorites }) {
   const { eventid } = useParams()
   const [event, setEvent] = useState([])
 
@@ -29,8 +29,9 @@ export default function SingleEvent({addToFavorites}) {
 
 
   const img_url = (i) => {
-    let x = i.thumbnail.path
-    return x + '.jpg'
+    const url = i.thumbnail.path
+    const x = url.split(':')
+    return x[0] + 's:' + x[1] + '.jpg'
   }
 
   // const extra_img_url = (i) => {
@@ -42,15 +43,15 @@ export default function SingleEvent({addToFavorites}) {
   //   }
   // }
 
-//   const getPrice = (c) => {
-//     if (c.prices.length > 1){
-//       return `Price: \$${c.prices[1].price}`
-//     } else if (c.prices[0].price > 0){
-//       return `Price: \$${c.prices[0].price}`
-//     } else {
-//       return null
-//     }
-//   };
+  //   const getPrice = (c) => {
+  //     if (c.prices.length > 1){
+  //       return `Price: \$${c.prices[1].price}`
+  //     } else if (c.prices[0].price > 0){
+  //       return `Price: \$${c.prices[0].price}`
+  //     } else {
+  //       return null
+  //     }
+  //   };
 
   return event.length === 0 ? <></> : (
     <div className='container fullpage col-10 my-5'>

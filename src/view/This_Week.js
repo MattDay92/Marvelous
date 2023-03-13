@@ -17,7 +17,7 @@ export default function This_Week() {
 
         const hash = MARVEL_HASH
         const PublicKey = MARVEL_API_KEY
-        const url = `http://gateway.marvel.com/v1/public/comics?format=comic&noVariants=true&dateDescriptor=thisWeek&orderBy=title&limit=100&ts=1&apikey=${PublicKey}&hash=${hash}`
+        const url = `https://gateway.marvel.com/v1/public/comics?format=comic&noVariants=true&dateDescriptor=thisWeek&orderBy=title&limit=100&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
         const res = await fetch(url)
@@ -28,8 +28,9 @@ export default function This_Week() {
     }
 
     const img_url = (c) => {
-        let x = c.thumbnail.path
-        return x + '.jpg'
+        const url = c.thumbnail.path
+        const x = url.split(':')
+        return x[0] + 's:' + x[1] + '.jpg'
     }
 
     useEffect(() => {
