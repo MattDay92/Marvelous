@@ -39,11 +39,11 @@ export default function Nav({handleClick, getFirstName, message, getProfileInfo,
                                     <Link className="nav-link" to={'/profile'}>{(getFirstName(user))}'s Profile</Link>
                                 </li>
                                 <li className='nav-item'>
-                                    <Link className='nav-link' to={'/'} onClick={() => {logMeOut()}}>Logout</Link>
+                                    <Link className='nav-link' to={'/'} onClick={() => {logMeOut(); handleClick()}}>Logout</Link>
                                 </li>
                             </> :
                                 <li className="nav-item">
-                                    <Link className="nav-link" onClick={() => {createPopUp()}}>Login</Link>
+                                    <Link className="nav-link" onClick={() => {createPopUp(); handleClick()}}>Login</Link>
                                 </li>}
                         </ul>
                     </div>

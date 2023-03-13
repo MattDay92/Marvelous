@@ -47,7 +47,7 @@ def createUser():
 
     return {
         'status': 'ok',
-        'message': 'User successfully updated',
+        'message': f"{user.name}'s profile successfully updated!",
         'user': user.to_dict()
     }
 

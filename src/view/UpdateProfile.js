@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import React from 'react'
+import {useNavigate } from 'react-router-dom'
 
-export default function UpdateProfile({ updateUser, profile, user, getFirstName }) {
+export default function UpdateProfile({ handleClick, updateUser, profile, user, getFirstName }) {
     
     const navigate = useNavigate()
 

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
-import Paper from '@mui/material/Paper';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import Snackbar from '@mui/material/Snackbar';
 
 
 
@@ -14,10 +12,13 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
   const [rating, setRating] = useState()
   const [comments, setComments] = useState([])
 
+  const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
+  const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+
   const getComic = async () => {
 
-    const hash = '93ff149b2c28d22cb9adf5cdafa2a845'
-    const PublicKey = 'efad1a5f2b651e2a8b909ed94669c244'
+    const hash = MARVEL_HASH
+    const PublicKey = MARVEL_API_KEY
     const url = `http://gateway.marvel.com/v1/public/comics/${comicid}?ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
@@ -159,9 +160,6 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
   }
 
 
-  console.log(comments)
-
-
   return comic.length === 0 ? <></> : (
     <div className='container fullpage col-10 my-5'>
       <div className='row d-flex justify-content-around'>
@@ -214,13 +212,6 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
 
         </div>
       </div>
-      <Snackbar
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message={message}
-        action={action}
-      />
     </div>
   )
 }

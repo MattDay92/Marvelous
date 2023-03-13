@@ -5,10 +5,13 @@ export default function SingleEvent({addToFavorites}) {
   const { eventid } = useParams()
   const [event, setEvent] = useState([])
 
+  const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
+  const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+
   const getEvent = async () => {
 
-    const hash = '93ff149b2c28d22cb9adf5cdafa2a845'
-    const PublicKey = 'efad1a5f2b651e2a8b909ed94669c244'
+    const hash = MARVEL_HASH
+    const PublicKey = MARVEL_API_KEY
     const url = `http://gateway.marvel.com/v1/public/events/${eventid}?ts=1&apikey=${PublicKey}&hash=${hash}`
 
 

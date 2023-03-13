@@ -3,13 +3,16 @@ import React, { useState } from 'react'
 export default function Events() {
     const [events, setEvents] = useState([])
 
+    const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
+    const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+
 
     const getEvent = async (event) => {
         event.preventDefault()
         const search = event.target.search.value
 
-        const hash = '93ff149b2c28d22cb9adf5cdafa2a845'
-        const PublicKey = 'efad1a5f2b651e2a8b909ed94669c244'
+        const hash = MARVEL_HASH
+        const PublicKey = MARVEL_API_KEY
         const url = `http://gateway.marvel.com/v1/public/events?name=${search}&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 

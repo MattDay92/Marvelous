@@ -7,13 +7,16 @@ import './App.css';
 const REACT_APP_FIREBASE_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY
 const REACT_APP_FIREBASE_APP_ID = process.env.REACT_APP_FIREBASE_APP_ID
 
+const MARVEL_API_KEY = process.env.MARVEL_API_KEY
+const MARVEL_HASH = process.env.MARVEL_HASH
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCYWl8mv_ErzgzPch8zA7oxkSjpZPbkhaQ",
+  apiKey: REACT_APP_FIREBASE_API_KEY,
   authDomain: "marvelous-91080.firebaseapp.com",
   projectId: "marvelous-91080",
   storageBucket: "marvelous-91080.appspot.com",
   messagingSenderId: "62043692510",
-  appId: "1:62043692510:web:cb31fd8f0e8744e1e4d14f"
+  appId: REACT_APP_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);

@@ -18,6 +18,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+
 export default function () {
   const getUserFromLS = () => {
     const foundUser = localStorage.getItem('user_marvelous');
@@ -53,6 +54,9 @@ export default function () {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('')
 
+  const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
+  const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+
   const handleClick = () => {
     setOpen(true);
   };
@@ -79,8 +83,8 @@ export default function () {
   );
 
   const getAllCharacters = async () => {
-    const hash = '93ff149b2c28d22cb9adf5cdafa2a845'
-    const PublicKey = 'efad1a5f2b651e2a8b909ed94669c244'
+    const hash = MARVEL_HASH
+    const PublicKey = MARVEL_API_KEY
     const url = `http://gateway.marvel.com/v1/public/characters?limit=100&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
@@ -313,6 +317,9 @@ export default function () {
     const user = result.user;
     console.log(user)
     setUser(user)
+
+    setMessage('Successfully logged in to Marvelous!')
+
     localStorage.setItem('user_marvelous', JSON.stringify(user))
 
   }
@@ -325,6 +332,7 @@ export default function () {
     setIds([])
     setList([])
     setListIds([])
+    setMessage('Successfully logged out of Marvelous!')
     localStorage.removeItem('user_marvelous')
     localStorage.removeItem('profile_marvelous')
     localStorage.removeItem('chars_marvelous')
@@ -401,7 +409,8 @@ export default function () {
     console.log(data)
 
     setProfile(data.user)
-    localStorage.setItem('profile_marvelous', JSON.stringify(data.user)) 
+    setMessage(data.message)
+    localStorage.setItem('profile_marvelous', JSON.stringify(data.user))
   };
 
   const getProfileInfo = async (user) => {
@@ -430,6 +439,7 @@ export default function () {
 
   useEffect(() => {
     createUser()
+    
   }, [user])
 
   useEffect(() => {
@@ -638,7 +648,7 @@ export default function () {
       <BrowserRouter>
         <Nav createPopUp={createPopUp} handleClick={handleClick} getProfileInfo={getProfileInfo} user={user} logMeOut={logMeOut} getFirstName={getFirstName} />
         <Routes>
-          <Route path='/' element={<Home handleClick={handleClick} message={message} handleClose={handleClose} action={action} open={open}/>} />
+          <Route path='/' element={<Home handleClick={handleClick} message={message} handleClose={handleClose} action={action} open={open} />} />
           <Route path='/character' element={<Character allChars={allChars} />} />
           <Route path='/comics' element={<Search_Comics />} />
           <Route path='/events' element={<Events />} />
@@ -647,9 +657,16 @@ export default function () {
           <Route path='/comics/:comicid' element={<SingleComic handleClick={handleClick} message={message} handleClose={handleClose} action={action} open={open} addToReadingList={addToReadingList} getReadingList={getReadingList} deleteFromReadingList={deleteFromReadingList} listids={listids} favorites={favorites} favoriteIds={favoriteIds} deleteFromFavorites={deleteFromFavorites} ids={ids} addToFavorites={addToFavorites} user={user} />} />
           <Route path='/events/:eventid' element={<SingleEvent addToFavorites={addToFavorites} />} />
           <Route path='/profile' element={<MyProfile favorites={favorites} setFavorites={setFavorites} getFavorites={getFavorites} profile={profile} user={user} getFirstName={getFirstName} />} />
-          <Route path='/profile/update' element={<UpdateProfile updateUser={updateUser} profile={profile} user={user} getFirstName={getFirstName} />} />
-          <Route path='/readinglist' element={<ReadingList getReadingList={getReadingList} list={list} deleteFromReadingList={deleteFromReadingList} setList={setList} deleteFromFavorites={deleteFromFavorites} ids={ids} addToFavorites={addToFavorites} getFirstName={getFirstName} user={user} />} />
+          <Route path='/profile/update' element={<UpdateProfile handleClick={handleClick} updateUser={updateUser} profile={profile} user={user} getFirstName={getFirstName} />} />
+          <Route path='/readinglist' element={<ReadingList setMessage={setMessage} handleClick={handleClick} getReadingList={getReadingList} list={list} deleteFromReadingList={deleteFromReadingList} setList={setList} deleteFromFavorites={deleteFromFavorites} ids={ids} addToFavorites={addToFavorites} getFirstName={getFirstName} user={user} />} />
         </Routes>
+        <Snackbar
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+          message={message}
+          action={action}
+        />
         <Footer />
       </BrowserRouter>
     </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 
-export default function ReadingList({ user, getReadingList, getFirstName, list, setList }) {
+export default function ReadingList({handleClick, setMessage, user, getReadingList, getFirstName, list, setList }) {
 
 
     const img_url = (i) => {
@@ -38,6 +38,8 @@ export default function ReadingList({ user, getReadingList, getFirstName, list, 
         setList(data.list)
     
         getReadingList()
+
+        setMessage(data.message)
       }
     
 
@@ -55,7 +57,7 @@ export default function ReadingList({ user, getReadingList, getFirstName, list, 
                         <Link key={c.comicId} to={`/comics/${c.comicId}`}><img src={img_url(c)} alt={c.title} className='my-3 comic-img' style={{ width: '100%' }} /></Link>
                         {/* <h5>{c.title}</h5> */}
                         <div>
-                            <button onClick={() => { deleteFromReadingList(c) }} className='btn btn-red btn-sm my-1 mx-1 text-center'>Delete <AutoStoriesIcon /></button>
+                            <button onClick={() => { deleteFromReadingList(c); handleClick() }} className='btn btn-red btn-sm my-1 mx-1 text-center'>Delete <AutoStoriesIcon /></button>
                         </div>
                     </div>)}
                 </div>}

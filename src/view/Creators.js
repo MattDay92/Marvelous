@@ -6,15 +6,18 @@ export default function Creators() {
     const [comics, setComics] = useState([])
     const [events, setEvents] = useState([])
 
+    const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
+    const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+
 
     const getCreator = async (event) => {
         event.preventDefault()
         const search = event.target.search.value
         const name = search.split(" ")
 
-        const hash = '93ff149b2c28d22cb9adf5cdafa2a845'
-        const PublicKey = 'efad1a5f2b651e2a8b909ed94669c244'
-        const url = `http://gateway.marvel.com/v1/public/creators?firstName=${name[0]}&lastName=${name[1]}&ts=1&apikey=${PublicKey}&hash=${hash}`
+        const hash = MARVEL_HASH
+        const PublicKey = MARVEL_API_KEY
+        const url = `http://gateway.marvel.com/v1/public/creators?firstName=${name[0]}&lastName=${name[-1]}&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
         const res = await fetch(url)

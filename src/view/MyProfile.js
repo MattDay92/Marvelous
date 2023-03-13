@@ -12,6 +12,9 @@ import InfoIcon from '@mui/icons-material/Info';
 export default function MyProfile({ user, profile, getFirstName, getFavorites, favorites, setFavorites }) {
     const [ids, setIds] = useState([])
 
+    const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
+    const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+
     useEffect(() => {
         getFavorites()
     }, [])

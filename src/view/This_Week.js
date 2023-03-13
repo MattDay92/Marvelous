@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 
 export default function This_Week() {
     const [new_comics, setNewComics] = useState([])
 
+    const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
+    const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
+
 
     const getNewComics = async () => {
 
-        const hash = '93ff149b2c28d22cb9adf5cdafa2a845'
-        const PublicKey = 'efad1a5f2b651e2a8b909ed94669c244'
+        const hash = MARVEL_HASH
+        const PublicKey = MARVEL_API_KEY
         const url = `http://gateway.marvel.com/v1/public/comics?format=comic&noVariants=true&dateDescriptor=thisWeek&orderBy=title&limit=100&ts=1&apikey=${PublicKey}&hash=${hash}`
 
 
@@ -37,14 +39,6 @@ export default function This_Week() {
     return (
         <div className='fullpage'>
             <h1 className='text-center my-5'>On Sale This Week</h1>
-            {/* <div className='row d-flex justify-content-center my-5'>
-                {new_comics.length === 0 ? <p className='text-center'>Information is loading...</p> :
-                    <div className='row col-10 text-center'>
-                        {new_comics.map(i => <div className='col-2 my-3'>
-                            <Link to={`/comics/${i.id}`}><img src={(img_url(i))} alt={i.title} style={{ width: '100%' }} /></Link>
-                            <p>{i.title}</p>
-                        </div>)}
-                    </div>}</div> */}
             
             <div className='col d-flex justify-content-center'>
                 <ImageList sx={{ width: 1200 }} cols={5} gap={10}>
