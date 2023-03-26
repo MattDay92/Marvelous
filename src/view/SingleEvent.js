@@ -17,7 +17,6 @@ export default function SingleEvent({ addToFavorites }) {
 
     const res = await fetch(url)
     const data = await res.json()
-    console.log(data.data.results[0])
     setEvent(data.data.results[0])
 
 

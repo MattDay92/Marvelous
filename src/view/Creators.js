@@ -22,11 +22,10 @@ export default function Creators() {
 
         const res = await fetch(url)
         const data = await res.json()
-        console.log(data.data.results[0])
+        console.log(data)
         setCreator(data.data.results[0])
 
         const creator_id = data.data.results[0].id
-        console.log(creator_id)
 
         const url2 = `https://gateway.marvel.com/v1/public/creators/${creator_id}/comics?format=comic&noVariants=true&orderBy=-onsaleDate&ts=1&apikey=${PublicKey}&hash=${hash}`
 
@@ -34,7 +33,6 @@ export default function Creators() {
         const res2 = await fetch(url2)
         const data2 = await res2.json()
         setComics(data2.data.results)
-        console.log(data2.data.results)
 
         const url3 = `https://gateway.marvel.com/v1/public/creators/${creator_id}/events?&ts=1&apikey=${PublicKey}&hash=${hash}`
 
@@ -42,9 +40,7 @@ export default function Creators() {
         const res3 = await fetch(url3)
         const data3 = await res3.json()
         setEvents(data3.data.results)
-        console.log(data3.data.results)
     }
-
 
     const img_url = (i) => {
         const url = i.thumbnail.path

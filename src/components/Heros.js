@@ -33,30 +33,30 @@ export default function Heros({favorite_char}) {
     <div className='container'>
         <h3 className='text-center my-3'>Popular Characters</h3>
         <div className='row d-flex justify-content-center align-items-center'>
-            <div className='col-1'>
+            <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('Captain America')}}><img src={captainAmerica}  alt='Captain America' style={{width: '100%'}}/></Link>
             </div>
-            <div className='col-1'>
+            <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('Hawkeye')}}><img src={Hawkeye} alt='Hawkeye'  style={{width: '100%'}} /></Link>
             </div>
-            <div className='col-1'>
+            <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('Hulk')}}><img src={Hulk} alt='Hulk' style={{width: '100%'}}/></Link>
             </div>
-            <div className='col-1'>
+            <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('Spider-Man (Peter Parker)')}}><img src={Spiderman} alt='Spider-Man' style={{width: '100%'}}/></Link>
             </div>
         </div>
         <div className='row d-flex justify-content-center align-items-center'>
-            <div className='col-1'>
+            <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('Iron Man')}}><img src={ironMan} alt='Iron Man' style={{width: '100%'}}/></Link>
             </div>
-            <div className='col-1'>
+            <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('X-Men')}}><img src={Xmen} alt='X-Men Logo' style={{width: '100%'}}/></Link>
             </div>
-            <div className='col-1'>
+            <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('Thor')}}><img src={Thor} alt='Thor' style={{width: '100%'}}/></Link>
             </div>
-            <div className='col-1'> 
+            <div className='col-lg-1 col-2'> 
                 <Link onClick={()=>{getCharacter('Wolverine')}}><img src={Wolverine} alt='Wolverine' style={{width: '100%'}}/></Link>
             </div>
         </div>

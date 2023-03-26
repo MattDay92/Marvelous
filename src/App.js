@@ -316,7 +316,6 @@ export default function () {
     const result = await signInWithPopup(auth, provider);
 
     const user = result.user;
-    console.log(user)
     setUser(user)
 
     setMessage('Successfully logged in to Marvelous!')
@@ -366,11 +365,8 @@ export default function () {
       }
     }
 
-    console.log(url, options)
-
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
 
     getProfileInfo(data.user)
     localStorage.setItem('profile_marvelous', JSON.stringify(data.user))
@@ -403,11 +399,9 @@ export default function () {
       }
     }
 
-    console.log(url, options)
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
 
     setProfile(data.user)
     setMessage(data.message)
@@ -424,11 +418,9 @@ export default function () {
       }
     }
 
-    console.log(url, options)
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
 
     setProfile(data.user)
     localStorage.setItem('profile_marvelous', JSON.stringify(data.user))
@@ -478,11 +470,9 @@ export default function () {
       }
     }
 
-    console.log(url, options)
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
 
     setMessage(data.message)
 
@@ -503,11 +493,9 @@ export default function () {
       }
     }
 
-    console.log(url, options)
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
     setFavorites(data.favorites)
   }
 
@@ -525,11 +513,9 @@ export default function () {
       }
     }
 
-    console.log(url, options)
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
     setList(data.list)
   };
 
@@ -551,11 +537,9 @@ export default function () {
       }
     }
 
-    console.log(url, options)
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
 
     setMessage(data.message)
 
@@ -578,11 +562,9 @@ export default function () {
       }
     }
 
-    console.log(url, options)
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
     setList(data.list)
 
     setMessage(data.message)
@@ -610,11 +592,9 @@ export default function () {
       }
     }
 
-    console.log(url, options)
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
     setFavorites(data.favorites)
 
     setMessage(data.message)
@@ -638,7 +618,6 @@ export default function () {
       for (i = 0; i < list.length; i++) {
         ids.push(list[i].comicId)
       }
-      console.log(ids)
       setListIds(ids)
     }
   }

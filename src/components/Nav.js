@@ -9,7 +9,7 @@ export default function Nav({handleClick, getFirstName, message, getProfileInfo,
 
     return (
         <Paper elevation={10}>
-            <nav className="navbar navbar-expand-lg">
+            <nav className="navbar navbar-dark navbar-expand-lg">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to={'/'}>Marvelous</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,15 +25,15 @@ export default function Nav({handleClick, getFirstName, message, getProfileInfo,
                                     Search
                                 </a>
                                 <ul className="dropdown-menu py-0">
-                                    <li><Link className="dropdown-item" to={'/character'} >Characters</Link></li>
-                                    <li><Link className="dropdown-item" to={'/comics'}>Comics</Link></li>
-                                    <li><Link className="dropdown-item" to={'/events'}>Events</Link></li>
-                                    <li><Link className="dropdown-item" to={'/creators'}>Creators</Link></li>
+                                    <li><Link className="nav-link" to={'/character'} >Characters</Link></li>
+                                    <li><Link className="nav-link" to={'/comics'}>Comics</Link></li>
+                                    <li><Link className="nav-link" to={'/events'}>Events</Link></li>
+                                    {/* <li><Link className="dropdown-item" to={'/creators'}>Creators</Link></li> */}
                                 </ul>
                             </li>
                             {user.uid ? <>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to={'/readinglist'}>Reading List</Link>
+                                    <Link className="nav-link" aria-current="page" to={'/readinglist'}>Reading List</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to={'/profile'}>{(getFirstName(user))}'s Profile</Link>

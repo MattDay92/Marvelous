@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import Heros from '../components/Heros'
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import Skeleton from '@mui/material/Skeleton';
+
 
 
 
@@ -26,11 +28,9 @@ export default function Character({allChars}) {
 
         const res = await fetch(url)
         const data = await res.json()
-        console.log(data.data.results[0])
         setChar(data.data.results[0])
 
         const character_id = data.data.results[0].id
-        console.log(character_id)
 
         const url2 = `https://gateway.marvel.com/v1/public/characters/${character_id}/comics?format=comic&noVariants=true&orderBy=-onsaleDate&ts=1&apikey=${PublicKey}&hash=${hash}`
 
@@ -38,7 +38,6 @@ export default function Character({allChars}) {
         const res2 = await fetch(url2)
         const data2 = await res2.json()
         setComics(data2.data.results)
-        console.log(data2.data.results)
 
         const url3 = `https://gateway.marvel.com/v1/public/characters/${character_id}/events?&ts=1&apikey=${PublicKey}&hash=${hash}`
 
@@ -46,7 +45,6 @@ export default function Character({allChars}) {
         const res3 = await fetch(url3)
         const data3 = await res3.json()
         setEvents(data3.data.results)
-        console.log(data3.data.results)
     }
 
     const img_url = () => {
@@ -74,7 +72,6 @@ export default function Character({allChars}) {
         const PublicKey = MARVEL_API_KEY
 
         const character_id = char.id
-        console.log(character_id)
 
         const url2 = `https://gateway.marvel.com/v1/public/characters/${character_id}/comics?format=comic&noVariants=true&orderBy=-onsaleDate&ts=1&apikey=${PublicKey}&hash=${hash}`
 
@@ -82,7 +79,6 @@ export default function Character({allChars}) {
         const res2 = await fetch(url2)
         const data2 = await res2.json()
         setComics(data2.data.results)
-        console.log(data2.data.results)
 
         const url3 = `https://gateway.marvel.com/v1/public/characters/${character_id}/events?&ts=1&apikey=${PublicKey}&hash=${hash}`
 
@@ -90,7 +86,6 @@ export default function Character({allChars}) {
         const res3 = await fetch(url3)
         const data3 = await res3.json()
         setEvents(data3.data.results)
-        console.log(data3.data.results)
     }
 
     useEffect(() => {
@@ -102,8 +97,7 @@ export default function Character({allChars}) {
         <div className='fullpage'>
             <h1 className='text-center my-5'>Search Characters</h1>
             <div className='row d-flex justify-content-center text-center'>
-                <form className="col-4 char" onSubmit={getCharacter}>
-                    {/* <input className='form-control' name='search' /> */}
+                <form className="col-lg-4 col-8 char" onSubmit={getCharacter}>
                     <Autocomplete
                         id="character-search"
                         options={allChars.map((option) => option)}
@@ -115,20 +109,21 @@ export default function Character({allChars}) {
             </div>
             <div className='row d-flex justify-content-center my-5'>
                 {char.length === 0 ?
-                    <><Heros favorite_char={favorite_char} /></> :
-                    <><div className='col-3 text-center'>
+                    <Heros favorite_char={favorite_char} /> :
+                    <><div className='col-lg-3 col-md-5 col-8 text-center'>
                         <img className='my-3' src={img_url()} style={{ width: '100%' }} />
                         <h2>{char.name}</h2>
                         <p>{char.description}</p>
                     </div>
-                        <div className='row col-10 my-5 text-center'>
-                            <h2>Comics featuring {char.name}</h2>
-                            {comics.filter(c => c.digitalId > 0).map(i => <Link className='col-2 my-3' key={i.id} to={`/comics/${i.id}`}><img src={(img_url_comics(i))} style={{ width: '100%' }} /></Link>)}
+                    {comics.length === 0? <><Skeleton sx={{ bgcolor: 'grey.900' }} variant="rectangular" width='83%' height='60vh' /></> :
+                        <><div className='row col-10 my-5 text-center'>
+                            <h2>Recent Comics featuring {char.name}</h2>
+                            {comics.filter(c => c.digitalId > 0).map(i => <Link className='col-lg-2 col-md-4 col-6 my-3' key={i.id} to={`/comics/${i.id}`}><img src={(img_url_comics(i))} style={{ width: '100%' }} /></Link>)}
                         </div>
                         <div className='row col-10 text-center'>
                             <h2>Events featuring {char.name}</h2>
-                            {events.map(i => <Link className='col-2 my-3' key={i.id} to={`/events/${i.id}`}><img src={(img_url_events(i))} style={{ width: '100%' }} /></Link>)}
-                        </div></>}
+                            {events.map(i => <Link className='col-lg-2 col-md-4 col-6 my-3' key={i.id} to={`/events/${i.id}`}><img src={(img_url_events(i))} style={{ width: '100%' }} /></Link>)}
+                        </div></>}</>}
             </div>
         </div>
     )

@@ -31,9 +31,7 @@ export default function ReadingList({handleClick, setMessage, user, getReadingLi
             "Content-Type": 'application/json'
           }
         }
-    
-        console.log(url, options)
-    
+        
         const res = await fetch(url, options);
         const data = await res.json();
         console.log(data)
@@ -50,13 +48,13 @@ export default function ReadingList({handleClick, setMessage, user, getReadingLi
                 <div className='row text-center my-5'>
                     <h1>{getFirstName(user)}'s Reading List</h1>
                 </div>
-                {list.length === 0 ? <p className='text-center'>You have not added any titles to your reading list.  </p> :
+                {list.length === 0 ? <><p className='text-center'>You have not added any titles to your reading list.  </p></> :
                 <div className='row my-5'>
-                    {list.map(c => <div className='col-2 text-center'>
+                    {list.map(c => <div className='col-6 col-md-3 col-lg-2 text-center'>
                         <Link key={c.comicId} to={`/comics/${c.comicId}`}><img src={img_url(c)} alt={c.title} className='my-3 comic-img' style={{ width: '100%' }} /></Link>
                         {/* <h5>{c.title}</h5> */}
                         <div>
-                            <button onClick={() => { deleteFromReadingList(c); handleClick() }} className='btn btn-red btn-sm my-1 mx-1 text-center'>Delete <AutoStoriesIcon /></button>
+                            <button onClick={() => { deleteFromReadingList(c); handleClick() }} className='btn btn-red btn-sm my-1 mx-1 text-center'><AutoStoriesIcon /></button>
                         </div>
                     </div>)}
                 </div>}

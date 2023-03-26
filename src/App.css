@@ -18,6 +18,12 @@ body {
     min-height: 100vh;
 }
 
+.cover {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+}
+
 .main-title {
     font-family: 'Rampart One', cursive;
     color: rgb(255, 255, 255);
@@ -33,6 +39,11 @@ nav {
     background-color: rgb(188, 58, 58);
     text-decoration: none !important;
 }
+
+.page-change {
+    background: #353535;
+}
+
 
 .footer {
     background-color: rgb(188, 58, 58);
@@ -52,12 +63,11 @@ nav {
 }
 
 .navbar-brand, .nav-link, .dropdown-item {
-    color: rgb(238, 217, 56);
     background: rgb(188, 58, 58);
 }
 
 .navbar-brand:hover, .nav-link:hover, .dropdown-item:hover {
-    color: white;
+    color: rgb(238, 217, 56) !important;
     background: rgb(188, 58, 58);
 }
 
@@ -75,6 +85,16 @@ nav {
     background: rgb(211, 190, 25);
     color: #242323
 }
+
+
+
+.popover {
+    color: #353535;
+    background: rgb(218, 218, 218);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 
 .btn-red {
     color: white;

@@ -11,7 +11,7 @@ export default function UpdateProfile({ handleClick, updateUser, profile, user, 
             <form onSubmit={updateUser}>
                 <div className='container fullpage col-10 my-5'>
                     <div className='row my-3'>
-                        <div className='col-6'>
+                        <div className='col-12 col-md-6'>
                             <h1 className='my-3'>Name:  <input className='form-control' type='text' name='name' placeholder='Name' defaultValue={user.displayName} /></h1>
                             <h3 className='my-3'>Favorite Character:  <input className='form-control' type='text' name='favorite_char' placeholder='Favorite Character' defaultValue={profile.favoriteChar} /></h3>
                             <p className='my-3'>Bio: <input className='form-control' type='text' name='bio' placeholder='Bio' defaultValue={profile.bio} /></p>

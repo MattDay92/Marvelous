@@ -46,55 +46,32 @@ export default function MyProfile({ user, profile, getFirstName, getFavorites, f
         <div className='fullpage'>
             <div className='container col-10 my-5'>
                 <div className='row my-3'>
-                    <div className='col-6'>
+                    <div className='col-md-6 col-12'>
                         <h1 className='my-3'>{profile.displayName}</h1>
                         <h3 className='my-3'>Favorite Character: {profile.favoriteChar}</h3>
                         <p className='my-3'>{profile.bio}</p>
-                        {/* <h4 className='my-3'>Comics Read: </h4> */}
                     </div>
-                    <div className='col-6 d-flex justify-content-center align-items-center'>
-                        <img className='rounded-circle' src={profile.photoURL} style={{ height: '50%'}} />
+                    <div className='col-md-6 d-flex justify-content-center align-items-center'>
+                        <img className='rounded-circle' src={profile.photoURL} style={{ height: '100%' }} />
                     </div>
                 </div>
                 <div className='d-flex justify-content-around my-3'>
-                    <Link to={'/profile/update'}><button className='btn btn-yellow' >Update Profile</button></Link>
-                    <Link to={'/readinglist'}><button className='btn btn-yellow'>View {getFirstName(user)}'s Reading List</button></Link>
+                    <Link to={'/profile/update'}><button className='btn btn-yellow mx-2' >Update Profile</button></Link>
+                    <Link to={'/readinglist'}><button className='btn btn-yellow mx-2'>View {getFirstName(user)}'s Reading List</button></Link>
                 </div>
             </div>
-            {favorites.length === 0 ? <></> : (
+            {favorites.length === 0 ? <><h2 className='text-center'>{getFirstName(user)} has no favorites yet.</h2></> : (
                 <div className='container col-10'>
                     <div className='row text-center my-5'>
                         <h1>{getFirstName(user)}'s Favorites</h1>
                     </div>
 
-                    {/* <button onClick={() => { deleteFromFavorites(c) }} className='btn btn-red btn-sm my-1 mx-1'>Delete</button> */}
-
-                    <div className='col d-flex justify-content-center'>
-                        <ImageList sx={{ width: 1200 }} cols={5} gap={10}>
-                            {favorites.map((item) => (
-                                <Link to={`/comics/${item.comicId}`}><ImageListItem key={item.id}>
-                                    <img
-                                        src={`${img_url(item)}?w=164&h=164&fit=crop&auto=format`}
-                                        srcSet={`${img_url(item)}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                        alt={item.title}
-                                        loading="lazy"
-                                    />
-                                    <ImageListItemBar
-                                        title={item.title}
-                                        actionIcon={
-                                            <IconButton
-                                                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                                aria-label={`info about ${item.title}`}
-                                            >
-                                                <InfoIcon />
-                                            </IconButton>
-                                        }
-                                    />
-                                </ImageListItem></Link>
-                            ))}
-                        </ImageList>
+                    <div className='row my-5'>
+                        {favorites.map(c => <div className='col-6 col-md-3 col-lg-2 text-center'>
+                            <Link key={c.comicId} to={`/comics/${c.comicId}`}><img src={img_url(c)} alt={c.title} className='my-3 comic-img' style={{ width: '100%' }} /></Link>
+                        </div>)}
                     </div>
-                </div>)}
-        </div>
-    )
-}
+                </div>)
+            }
+        </div>)
+    }
