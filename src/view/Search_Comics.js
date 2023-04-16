@@ -22,7 +22,6 @@ export default function Comics() {
 
     const handleNext = () => {
 
-
         setPage(page + 20)
 
     }
@@ -60,8 +59,6 @@ export default function Comics() {
     }
 
 
-
-
     return comics.length === 0 ? <><div className='fullpage'>
         <h1 className='text-center my-5'>Search Comics</h1>
         <div className='row d-flex justify-content-center text-center'>
@@ -83,17 +80,25 @@ export default function Comics() {
                 <nav className='page-change'>
                     <ul className="pagination d-flex justify-content-center text-center">
                         <li className="page-item">
-                            <button onClick={handlePrevious} type='submit' className="btn btn-yellow mx-5">Previous</button>
+                            {page === 0 ?
+                                <button type='submit' className="btn btn-yellow mx-5 disabled">Previous</button>
+                                :
+                                <button onClick={handlePrevious} type='submit' className="btn btn-yellow mx-5">Previous</button>
+                            }
                         </li>
-                        <p className='page-count'>{page + 1} - {page + 20}</p>
+                            <p className='page-count'>{page + 1} - {page + comics.length}</p>
                         <li>
-                            <button onClick={handleNext} type='submit' className="btn btn-yellow mx-5">Next</button>
+                            {comics.length < 20 ?
+                                <button type='submit' className="btn btn-yellow mx-5 disabled">Next</button>
+                                :
+                                <button onClick={handleNext} type='submit' className="btn btn-yellow mx-5">Next</button>
+                            }
                         </li>
                     </ul>
                 </nav>
                 <div className='d-flex justify-content-center'>
                     <div className='row col-10'>
-                        {comics.map(i => <Link className='col-lg-2 col-md-4 col-6 my-3' key={i.id} to={`/comics/${i.id}`}><img src={(img_url(i))} alt={i.title} style={{ width: '100%' }} /></Link>)}
+                        {comics.map(i => <Link className='col-lg-2 col-md-4 col-6 my-3 comicload' key={i.id} to={`/comics/${i.id}`}><img src={(img_url(i))} alt={i.title} style={{ width: '100%' }} /></Link>)}
                     </div>
                 </div>
             </div>

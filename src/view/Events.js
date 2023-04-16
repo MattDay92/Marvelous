@@ -56,12 +56,12 @@ export default function Events() {
             <div className='row d-flex justify-content-center my-5'>
                 {events.length === 0 ? <></> :
                     <div className='row col-10 d-flex justify-content-center text-center'>
-                        <div className='col-lg-3 col-md-5 col-8 my-3'>
+                        <div className='col-lg-3 col-md-5 col-8 my-3 comicload'>
                             <img src={(img_url(events[0]))} alt={events[0].title} style={{ width: '100%' }} />
                             <h3 className='my-2'>{events[0].title}</h3>
                             <p className='my-2'>{events[0].description}</p>
                         </div>
-                        <div className='row col-10 my-5 text-center'>
+                        <div className='row col-10 my-5 text-center comicload'>
                             <h2>Comics included in {events[0].title}</h2>
                             {comics.filter(c => c.digitalId > 0).map(i => <Link className='col-lg-2 col-md-4 col-6 my-3' key={i.id} to={`/comics/${i.id}`}><img src={(img_url_comics(i))} style={{ width: '100%' }} /></Link>)}
                         </div>

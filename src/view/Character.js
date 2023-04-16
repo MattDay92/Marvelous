@@ -110,20 +110,20 @@ export default function Character({allChars}) {
             <div className='row d-flex justify-content-center my-5'>
                 {char.length === 0 ?
                     <Heros favorite_char={favorite_char} /> :
-                    <><div className='col-lg-3 col-md-5 col-8 text-center'>
+                    <><div className='col-lg-3 col-md-5 col-8 text-center comicload'>
                         <img className='my-3' src={img_url()} style={{ width: '100%' }} />
                         <h2>{char.name}</h2>
                         <p>{char.description}</p>
                     </div>
-                    {comics.length === 0? <><Skeleton sx={{ bgcolor: 'grey.900' }} variant="rectangular" width='83%' height='60vh' /></> :
-                        <><div className='row col-10 my-5 text-center'>
+                    
+                        <div className='row col-10 my-5 text-center comicload'>
                             <h2>Recent Comics featuring {char.name}</h2>
                             {comics.filter(c => c.digitalId > 0).map(i => <Link className='col-lg-2 col-md-4 col-6 my-3' key={i.id} to={`/comics/${i.id}`}><img src={(img_url_comics(i))} style={{ width: '100%' }} /></Link>)}
                         </div>
-                        <div className='row col-10 text-center'>
+                        <div className='row col-10 text-center comicload'>
                             <h2>Events featuring {char.name}</h2>
                             {events.map(i => <Link className='col-lg-2 col-md-4 col-6 my-3' key={i.id} to={`/events/${i.id}`}><img src={(img_url_events(i))} style={{ width: '100%' }} /></Link>)}
-                        </div></>}</>}
+                        </div></>}
             </div>
         </div>
     )

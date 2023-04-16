@@ -115,3 +115,17 @@ nav {
     box-shadow: 0 4px 8px 0 rgba(109, 109, 109, 0.779), 0 6px 20px 0 rgba(109, 109, 109, 0.779);
 }
 
+.comicload{
+    animation: newcomicimage 2s;
+}
+
+.charsload, .singlecomic{
+    animation: newcomicimage 1s;
+}
+
+@keyframes newcomicimage {
+    0% {opacity: 0;}
+    40% {opacity: 0;}
+    100% {opacity: 1;}
+}
+

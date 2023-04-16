@@ -39,13 +39,13 @@ export default function This_Week() {
             <h1 className='text-center my-5'>On Sale This Week</h1>
             <div className='d-flex justify-content-center'>
                 <div className='col-10 d-flex justify-content-center'>
-                    {new_comics.length != 0 ? <>
+                
                         <div className='row my-5'>
-                            {new_comics.map(c => <div className='col-6 col-md-3 col-lg-2 text-center'>
+                            {new_comics.map(c => <div className='col-6 comicload col-md-3 col-lg-2 text-center'>
                                 <Link key={c.id} to={`/comics/${c.id}`}><img src={img_url(c)} alt={c.title} className='my-3 comic-img' style={{ width: '100%' }} /></Link>
                             </div>)}
-                        </div></>  
-                    : (<Skeleton sx={{ bgcolor: 'grey.900' }} variant="rectangular" width='100%' height='60vh' />)}
+                        </div>
+                    
             </div>
         </div>
         </div >

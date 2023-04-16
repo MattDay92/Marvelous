@@ -32,7 +32,7 @@ export default function Heros({favorite_char}) {
   return (
     <div className='container'>
         <h3 className='text-center my-3'>Popular Characters</h3>
-        <div className='row d-flex justify-content-center align-items-center'>
+        <div className='row d-flex justify-content-center align-items-center charsload'>
             <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('Captain America')}}><img src={captainAmerica}  alt='Captain America' style={{width: '100%'}}/></Link>
             </div>
@@ -46,7 +46,7 @@ export default function Heros({favorite_char}) {
                 <Link onClick={()=>{getCharacter('Spider-Man (Peter Parker)')}}><img src={Spiderman} alt='Spider-Man' style={{width: '100%'}}/></Link>
             </div>
         </div>
-        <div className='row d-flex justify-content-center align-items-center'>
+        <div className='row d-flex justify-content-center align-items-center charsload'>
             <div className='col-lg-1 col-2'>
                 <Link onClick={()=>{getCharacter('Iron Man')}}><img src={ironMan} alt='Iron Man' style={{width: '100%'}}/></Link>
             </div>

@@ -66,7 +66,7 @@ export default function MyProfile({ user, profile, getFirstName, getFavorites, f
                         <h1>{getFirstName(user)}'s Favorites</h1>
                     </div>
 
-                    <div className='row my-5'>
+                    <div className='row my-5 comicload'>
                         {favorites.map(c => <div className='col-6 col-md-3 col-lg-2 text-center'>
                             <Link key={c.comicId} to={`/comics/${c.comicId}`}><img src={img_url(c)} alt={c.title} className='my-3 comic-img' style={{ width: '100%' }} /></Link>
                         </div>)}

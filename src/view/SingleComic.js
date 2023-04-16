@@ -187,14 +187,14 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
       <Popover.Header as="p" bsPrefix='popover'>Delete from Favorites</Popover.Header>
     </Popover>
   );
-  
 
 
 
 
 
-  return comic.length === 0 ? <><Skeleton sx={{ bgcolor: 'grey.900' }} variant="rectangular" width='100%' height='70vh' /></> : (
-    <div className='container fullpage col-10 my-5'>
+
+  return comic.length === 0 ? <><Skeleton sx={{ bgcolor: 'grey.000' }} variant="rectangular" width='100%' height='100vh' /></> : (
+    <div className='container fullpage singlecomic col-10 my-5'>
       <div className='row d-flex justify-content-around'>
         <div className='col-12 col-md-10 col-lg-5 mb-5 mb-lg-0 d-flex justify-content-center align-items-center'>
           <img className='comic-img' src={(img_url(comic))} alt={comic.title} style={{ width: '80%' }} />
@@ -221,22 +221,23 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
       <div className='row d-flex justify-content-around my-5'>
         <div className='col-12 col-lg-5 mb-5 mb-lg-0 text-center'>
           <a className='btn btn-yellow btn-sm col-sm-4 col-3 mx-3 text-center' href={comic.urls[0].url} target="_blank">Read on Marvel.com</a>
-          {listids.includes(parseInt(comicid)) ?
-          <><OverlayTrigger trigger="hover" placement="bottom" overlay={popoverDeleteReading}>
-            <button className='btn btn-red btn-sm col-2 mx-3 text-center' onClick={() => { deleteFromReadingList(comic); handleClick() }}><AutoStoriesIcon /></button>
-            </OverlayTrigger></>
-            :
-            <><OverlayTrigger trigger="hover" placement="bottom" overlay={popoverAddReading}>
-              <button className='btn addfavorite btn-sm col-2 mx-3 text-center' onClick={() => { addToReadingList(comic); handleClick() }}><AutoStoriesIcon /></button>
-            </OverlayTrigger></>}
-          {ids.includes(parseInt(comicid)) ?
-          <><OverlayTrigger trigger="hover" placement="bottom" overlay={popoverDeleteFavorite}>
-            <button className='btn btn-red btn-sm col-2 mx-3 text-center' onClick={() => { deleteFromFavorites(comic); handleClick() }}><FavoriteIcon /></button>
-            </OverlayTrigger></>
-            :
-            <><OverlayTrigger trigger="hover" placement="bottom" overlay={popoverAddFavorite}>
-            <button className='btn addfavorite btn-sm col-2 mx-3 text-center' onClick={() => { addToFavorites(comic); handleClick() }}><FavoriteIcon /></button>
-            </OverlayTrigger></>}
+          
+            {listids.includes(parseInt(comicid)) ?
+              <><OverlayTrigger trigger="hover" placement="bottom" overlay={popoverDeleteReading}>
+                <button className='btn btn-red btn-sm col-2 mx-3 text-center' onClick={() => { deleteFromReadingList(comic); handleClick() }}><AutoStoriesIcon /></button>
+              </OverlayTrigger></>
+              :
+              <><OverlayTrigger trigger="hover" placement="bottom" overlay={popoverAddReading}>
+                <button className='btn addfavorite btn-sm col-2 mx-3 text-center' onClick={() => { addToReadingList(comic); handleClick() }}><AutoStoriesIcon /></button>
+              </OverlayTrigger></>}
+            {ids.includes(parseInt(comicid)) ?
+              <><OverlayTrigger trigger="hover" placement="bottom" overlay={popoverDeleteFavorite}>
+                <button className='btn btn-red btn-sm col-2 mx-3 text-center' onClick={() => { deleteFromFavorites(comic); handleClick() }}><FavoriteIcon /></button>
+              </OverlayTrigger></>
+              :
+              <><OverlayTrigger trigger="hover" placement="bottom" overlay={popoverAddFavorite}>
+                <button className='btn addfavorite btn-sm col-2 mx-3 text-center' onClick={() => { addToFavorites(comic); handleClick() }}><FavoriteIcon /></button>
+              </OverlayTrigger></>}
         </div>
         <div className='col-lg-5 col-md-8 col-12'>
           <form className='my-2' onSubmit={addComment}>
