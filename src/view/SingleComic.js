@@ -195,7 +195,7 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
 
   return comic.length === 0 ? <><Skeleton sx={{ bgcolor: 'grey.000' }} variant="rectangular" width='100%' height='100vh' /></> : (
     <div className='container fullpage singlecomic col-10 my-5'>
-      <div className='row d-flex justify-content-around'>
+      <div className='row comic-info d-flex justify-content-around'>
         <div className='col-12 col-md-10 col-lg-5 mb-5 mb-lg-0 d-flex justify-content-center align-items-center'>
           <img className='comic-img' src={(img_url(comic))} alt={comic.title} style={{ width: '80%' }} />
         </div>

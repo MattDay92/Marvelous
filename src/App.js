@@ -628,7 +628,7 @@ export default function () {
       <BrowserRouter>
         <Nav createPopUp={createPopUp} handleClick={handleClick} getProfileInfo={getProfileInfo} user={user} logMeOut={logMeOut} getFirstName={getFirstName} />
         <Routes>
-          <Route path='/' element={<Home handleClick={handleClick} message={message} handleClose={handleClose} action={action} open={open} />} />
+          <Route path='/' element={<Home />} />
           <Route path='/character' element={<Character allChars={allChars} />} />
           <Route path='/comics' element={<Search_Comics />} />
           <Route path='/events' element={<Events />} />

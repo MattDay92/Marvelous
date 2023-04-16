@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import cover from '../components/Covers/Cover3.jpeg'
 
 
-export default function Home(handleClose, action, open, message,) {
+export default function Home() {
 
 
     return (
