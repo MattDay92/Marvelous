@@ -52,7 +52,7 @@ export default function MyProfile({ user, profile, getFirstName, getFavorites, f
                         <p className='my-3'>{profile.bio}</p>
                     </div>
                     <div className='col-md-6 d-flex justify-content-center align-items-center'>
-                        <img className='rounded-circle' src={profile.photoURL} style={{ height: '100%' }} />
+                        <img className='rounded-circle' src={profile.photoURL} alt={profile.displayName} style={{ height: '100%' }} />
                     </div>
                 </div>
                 <div className='d-flex justify-content-around my-3'>

@@ -33,25 +33,6 @@ export default function SingleEvent({ addToFavorites }) {
     return x[0] + 's:' + x[1] + '.jpg'
   }
 
-  // const extra_img_url = (i) => {
-  //   let x = i.path
-  //   if (comic.images.length > 1) {
-  //     return x + '.jpg'
-  //   } else {
-  //     return null
-  //   }
-  // }
-
-  //   const getPrice = (c) => {
-  //     if (c.prices.length > 1){
-  //       return `Price: \$${c.prices[1].price}`
-  //     } else if (c.prices[0].price > 0){
-  //       return `Price: \$${c.prices[0].price}`
-  //     } else {
-  //       return null
-  //     }
-  //   };
-
   return event.length === 0 ? <></> : (
     <div className='container fullpage col-10 my-5'>
       <div className='row d-flex justify-content-center'>

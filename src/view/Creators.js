@@ -79,7 +79,7 @@ export default function Creators() {
                 </div>
                 <div className='row d-flex justify-content-center my-5'>
                     <div className='col-4 text-center my-3'>
-                        <img src={(img_url(creator))} style={{ width: '100%' }} />
+                        <img src={(img_url(creator))} alt={creator.fullName} style={{ width: '100%' }} />
                         <h2 className='my-4'>{creator.fullName}</h2>
                     </div>
                 </div>

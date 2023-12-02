@@ -111,7 +111,7 @@ export default function Character({allChars}) {
                 {char.length === 0 ?
                     <Heros favorite_char={favorite_char} /> :
                     <><div className='col-lg-3 col-md-5 col-8 text-center comicload'>
-                        <img className='my-3' src={img_url()} style={{ width: '100%' }} />
+                        <img className='my-3' alt={char.name} src={img_url()} style={{ width: '100%' }} />
                         <h2>{char.name}</h2>
                         <p>{char.description}</p>
                     </div>
