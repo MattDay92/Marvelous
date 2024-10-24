@@ -38,39 +38,34 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
   };
 
   const getComments = async () => {
-    const reqBody = {
-      comic_id: comicid
-    }
-
-    const url = `${BACKEND_URL}/api/getcomments`
+// Updated to Node
+    const url = `${BACKEND_URL}/api/Comments/${comicid}`
     const options = {
-      method: "POST",
-      body: JSON.stringify(reqBody),
+      method: "GET",
       headers: {
         "Content-Type": 'application/json'
       }
     }
 
-    console.log(url, options)
-
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
-    setComments(data.comments)
+    console.log(data.comicComments)
+    setComments(data.comicComments)
   }
 
   const addComment = async (event) => {
+    // Updated to Node
     event.preventDefault()
     const comment = event.target.comment.value;
 
     const reqBody = {
-      user_id: user.uid,
-      comic_id: comicid,
+      comicID: comicid,
       comment: comment,
-      name: user.displayName
+      name: user.displayName, 
+      userId: user.uid
     }
 
-    const url = `${BACKEND_URL}/api/addcomment`
+    const url = `${BACKEND_URL}/api/Comments`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -86,14 +81,19 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
     getComments()
   }
 
+  useEffect(() => {
+    console.log(comic)
+  }, [comic])
+
   const deleteComment = async (c) => {
+    // Updated to Node
     const reqBody = {
-      uid: user.uid,
-      comic_id: c.comicId,
-      comment_id: c.id
+      userId: user.uid,
+      comicID: comicid,
+      commentID: c.id
     }
 
-    const url = `${BACKEND_URL}/api/deletecomment`
+    const url = `${BACKEND_URL}/api/Comments/delete`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -105,8 +105,7 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
 
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data)
-    setComments(data.comments)
+    console.log(data.message)
 
     getComments()
   }
@@ -250,7 +249,7 @@ export default function SingleComic({ user, handleClick, handleClose, action, op
             </div>
               <div className='d-flex justify-content-around'>
                 <span className='comment'>{c.name}</span>
-                {c.uid != user.uid ? <></> :
+                {c.userId != user.uid ? <></> :
                   <button className='btn delete-comment btn-red btn-sm' onClick={() => { deleteComment(c) }}>Delete</button>}
               </div>
             </div>

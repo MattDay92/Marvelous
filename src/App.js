@@ -17,9 +17,11 @@ import Footer from './components/Footer'
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import Test from './components/Test'
 
 
 export default function () {
+
   const getUserFromLS = () => {
     const foundUser = localStorage.getItem('user_marvelous');
     if (foundUser) {
@@ -45,7 +47,7 @@ export default function () {
   }
 
   const [user, setUser] = useState(getUserFromLS())
-  const [profile, setProfile] = useState(getProfileFromLS())
+  const [profile, setProfile] = useState()
   const [allChars, setAllChars] = useState(getCharsFromLS())
   const [favorites, setFavorites] = useState([])
   const [ids, setIds] = useState([])
@@ -336,8 +338,6 @@ export default function () {
     localStorage.removeItem('user_marvelous')
     localStorage.removeItem('profile_marvelous')
     localStorage.removeItem('chars_marvelous')
-
-
   }
 
   const getFirstName = (u) => {
@@ -346,30 +346,36 @@ export default function () {
   }
 
   const createUser = async () => {
-
+    // UPDATED TO NODE
     const reqBody = {
-      user_id: user.uid,
+      userID: user.uid,
       name: user.displayName,
       email: user.email,
-      profile_image: user.photoURL,
-      bio: 'None',
-      favorite_char: 'None'
+      profileIMG: user.photoURL,
     }
 
-    const url = `${BACKEND_URL}/api/createuser`
-    const options = {
-      method: "POST",
-      body: JSON.stringify(reqBody),
-      headers: {
-        "Content-Type": 'application/json'
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/Users/${user.uid}`);
+      const data = await response.json();
+
+      if (data.exists === false) {
+        const response = await fetch(`${BACKEND_URL}/api/Users`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(reqBody),
+        });
+      } else {
+        console.log(`User ${user.displayName} already exists.`)
+
+
+        // getProfileInfo(data.user)
+        // localStorage.setItem('profile_marvelous', JSON.stringify(data.user))
       }
+    } catch (error) {
+      console.error(error)
     }
-
-    const res = await fetch(url, options);
-    const data = await res.json();
-
-    getProfileInfo(data.user)
-    localStorage.setItem('profile_marvelous', JSON.stringify(data.user))
   };
 
   const updateUser = async (event) => {
@@ -408,21 +414,22 @@ export default function () {
     localStorage.setItem('profile_marvelous', JSON.stringify(data.user))
   };
 
-  const getProfileInfo = async (user) => {
-    const url = `${BACKEND_URL}/api/senduser`
+  const getProfileInfo = async () => {
+    // updated to Node
+    const url = `${BACKEND_URL}/api/Users/${user.uid}`
     const options = {
-      method: "POST",
-      body: JSON.stringify(user),
+      method: "GET",
       headers: {
         "Content-Type": 'application/json'
       }
     }
 
-
     const res = await fetch(url, options);
     const data = await res.json();
 
-    setProfile(data.user)
+    console.log(data)
+
+    setProfile(data)
     localStorage.setItem('profile_marvelous', JSON.stringify(data.user))
   }
 
@@ -432,7 +439,6 @@ export default function () {
 
   useEffect(() => {
     createUser()
-    
   }, [user])
 
   useEffect(() => {
@@ -446,53 +452,56 @@ export default function () {
 
   useEffect(() => {
     favoriteIds()
+    getFavorites()
   }, [favorites])
 
   useEffect(() => {
     listIds()
   }, [list])
 
+
   const addToFavorites = async (c) => {
-
+    // Updated to Node
     const reqBody = {
-      user_id: user.uid,
-      comic_id: c.id,
-      comic_img: c.thumbnail.path,
-      comic_title: c.title
+      comicID: c.id,
+      comicIMG: c.thumbnail.path,
+      comicTitle: c.title,
+      userId: user.uid
     }
 
-    const url = `${BACKEND_URL}/api/addtofavorites`
-    const options = {
-      method: "POST",
-      body: JSON.stringify(reqBody),
-      headers: {
-        "Content-Type": 'application/json'
+    try {
+      const url = `${BACKEND_URL}/api/Favorites`
+      const options = {
+        method: "POST",
+        body: JSON.stringify(reqBody),
+        headers: {
+          "Content-Type": 'application/json'
+        }
       }
+
+      const res = await fetch(url, options);
+      const data = await res.json();
+
+      console.log(data)
+
+      getFavorites();
+      setMessage(data.message)
+
+
+    } catch (error) {
+      console.error('Error adding favorite comic: ', error)
     }
-
-
-    const res = await fetch(url, options);
-    const data = await res.json();
-
-    setMessage(data.message)
-
-    getFavorites()
   }
 
   const getFavorites = async () => {
-    const reqBody = {
-      uid: user.uid
-    }
-
-    const url = `${BACKEND_URL}/api/getfavorites`
+    // Updated to Node
+    const url = `${BACKEND_URL}/api/Favorites/${user.uid}`;
     const options = {
-      method: "POST",
-      body: JSON.stringify(reqBody),
+      method: "GET",
       headers: {
         "Content-Type": 'application/json'
       }
     }
-
 
     const res = await fetch(url, options);
     const data = await res.json();
@@ -500,19 +509,14 @@ export default function () {
   }
 
   const getReadingList = async () => {
-    const reqBody = {
-      uid: user.uid
-    }
-
-    const url = `${BACKEND_URL}/api/getreadinglist`
+    // Updated to Node
+    const url = `${BACKEND_URL}/api/ReadingLists/${user.uid}`;
     const options = {
-      method: "POST",
-      body: JSON.stringify(reqBody),
+      method: "GET",
       headers: {
         "Content-Type": 'application/json'
       }
     }
-
 
     const res = await fetch(url, options);
     const data = await res.json();
@@ -520,40 +524,46 @@ export default function () {
   };
 
   const addToReadingList = async (c) => {
-
+    // Updated to Node
     const reqBody = {
-      user_id: user.uid,
-      comic_id: c.id,
-      comic_img: c.thumbnail.path,
-      comic_title: c.title
+      comicID: c.id,
+      comicIMG: c.thumbnail.path,
+      comicTitle: c.title,
+      userId: user.uid
     }
 
-    const url = `${BACKEND_URL}/api/addtoreadinglist`
-    const options = {
-      method: "POST",
-      body: JSON.stringify(reqBody),
-      headers: {
-        "Content-Type": 'application/json'
+    try {
+      const url = `${BACKEND_URL}/api/ReadingLists`
+      const options = {
+        method: "POST",
+        body: JSON.stringify(reqBody),
+        headers: {
+          "Content-Type": 'application/json'
+        }
       }
+
+      const res = await fetch(url, options);
+      const data = await res.json();
+
+      console.log(data)
+
+      getReadingList();
+      setMessage(data.message)
+
+
+    } catch (error) {
+      console.error('Error adding favorite comic: ', error)
     }
-
-
-    const res = await fetch(url, options);
-    const data = await res.json();
-
-    setMessage(data.message)
-
-    getReadingList()
   }
 
   const deleteFromReadingList = async (c) => {
+    // Updated to Node
     const reqBody = {
-      uid: user.uid,
-      comic_id: c.comicId,
-      comic_id: c.id
+      userId: user.uid,
+      comicID: c.id
     }
 
-    const url = `${BACKEND_URL}/api/deletefromreadinglist`
+    const url = `${BACKEND_URL}/api/ReadingLists/delete`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -565,25 +575,20 @@ export default function () {
 
     const res = await fetch(url, options);
     const data = await res.json();
-    setList(data.list)
 
     setMessage(data.message)
-
-    listids = listids.splice(listids.indexOf(c.comicId), 1)
 
     getReadingList()
   }
 
-
   const deleteFromFavorites = async (c) => {
-    console.log(c)
+    // Updated to Node
     const reqBody = {
-      uid: user.uid,
-      comic_id: c.comicId,
-      comic_id: c.id
+      userId: user.uid,
+      comicID: c.id
     }
 
-    const url = `${BACKEND_URL}/api/deletefromfavorites`
+    const url = `${BACKEND_URL}/api/Favorites/delete`
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -595,8 +600,8 @@ export default function () {
 
     const res = await fetch(url, options);
     const data = await res.json();
-    setFavorites(data.favorites)
 
+    setFavorites(data.favorites)
     setMessage(data.message)
   }
 
@@ -605,7 +610,7 @@ export default function () {
     let ids = []
     if (favorites.length > 0) {
       for (i = 0; i < favorites.length; i++) {
-        ids.push(favorites[i].comicId)
+        ids.push(favorites[i].comicID)
       }
       setIds(ids)
     }
@@ -614,14 +619,13 @@ export default function () {
   const listIds = () => {
     let i
     let ids = []
-    if (list.length > 0) {
+    if (list) {
       for (i = 0; i < list.length; i++) {
-        ids.push(list[i].comicId)
+        ids.push(list[i].comicID)
       }
       setListIds(ids)
     }
   }
-
 
   return (
     <div>
@@ -629,6 +633,7 @@ export default function () {
         <Nav createPopUp={createPopUp} handleClick={handleClick} getProfileInfo={getProfileInfo} user={user} logMeOut={logMeOut} getFirstName={getFirstName} />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/test' element={<Test />} />
           <Route path='/character' element={<Character allChars={allChars} />} />
           <Route path='/comics' element={<Search_Comics />} />
           <Route path='/events' element={<Events />} />

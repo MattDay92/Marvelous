@@ -9,8 +9,6 @@ export default function This_Week() {
     const MARVEL_API_KEY = process.env.REACT_APP_MARVEL_API_KEY
     const MARVEL_HASH = process.env.REACT_APP_MARVEL_HASH
 
-    console.log(new_comics)
-
     const getNewComics = async () => {
 
         const hash = MARVEL_HASH
