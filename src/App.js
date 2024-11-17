@@ -17,7 +17,6 @@ import Footer from './components/Footer'
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Test from './components/Test'
 
 
 export default function () {
@@ -633,7 +632,6 @@ export default function () {
         <Nav createPopUp={createPopUp} handleClick={handleClick} getProfileInfo={getProfileInfo} user={user} logMeOut={logMeOut} getFirstName={getFirstName} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/test' element={<Test />} />
           <Route path='/character' element={<Character allChars={allChars} />} />
           <Route path='/comics' element={<Search_Comics />} />
           <Route path='/events' element={<Events />} />

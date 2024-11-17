@@ -4,11 +4,19 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 
 const app = express();
 
-app.use(cors());
-
 const sequelize = new Sequelize('postgresql://marvelousdb_owner:wdOZCBMr02Yv@ep-raspy-rain-a5ouk4dv.us-east-2.aws.neon.tech/marvelousdb?sslmode=require')
 
-app.use(express.json());
+const corsOptions = {
+    origin: 'https://marvelous-91080.web.app/', // Change this to your frontend URL in production
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+};
+
+app.use(cors(corsOptions)); // Apply CORS middleware
+app.options('*', (req, res) => {
+    res.sendStatus(200);
+});
+app.use(express.json());    // To parse JSON bodies
 
 class User extends Model { }
 User.init(
@@ -162,14 +170,18 @@ Comment.belongsTo(User, {
     as: 'user',
 });
 
-const syncModels = async () => {
-    try {
-        await sequelize.sync({ force: true });
-        console.log('All models were synchronized successfully.');
-    } catch (error) {
-        console.error('Error synchronizing models:', error);
-    }
-};
+// const syncModels = async () => {
+//     try {
+//         await sequelize.sync();
+//         console.log('All models were synchronized successfully.');
+//     } catch (error) {
+//         console.error('Error synchronizing models:', error);
+//     }
+// };
+
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'CORS setup test successful!' });
+});
 
 
 app.get('/api/Users/:userID', async (req, res) => {
@@ -404,8 +416,9 @@ app.post('/api/Comments/delete', async (req, res) => {
     }
 })
 
-const port = 3001
+const PORT = 3001
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-})
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+
